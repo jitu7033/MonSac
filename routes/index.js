@@ -121,6 +121,17 @@ router.post("/cart/decrease/:id", isLoggedIn, async(req,res)=>{
     res.redirect("/cart");
 })
 
+router.post("/cart/delete/:id", isLoggedIn, async(req,res) => {
+  const userId = req.user._id;
+  const productId = req.params.id;
+
+  const user = await userModel.findById(userId);
+
+  user.cart = user.cart.filter(item => item._id.toString() !== productId);
+  await user.save();
+  res.redirect("/cart");
+})
+
 
 
 
