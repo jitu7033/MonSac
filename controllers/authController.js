@@ -26,7 +26,7 @@ module.exports.registerUser =  async function(req,res){
         let token = generatToken(user);
         // console.log(token);
         res.cookie("token",token);
-        res.redirect("/users");
+        res.redirect("/");
       });
      });
   }catch(err){
@@ -41,7 +41,7 @@ module.exports.loginUser = async function(req,res){
 
       let user = await userModel.findOne({email});
       // console.log(user);
-      
+
       if(!user) {
         req.flash("error", "you dont have an account, create one");
         return res.redirect("/");
@@ -63,12 +63,3 @@ module.exports.loginUser = async function(req,res){
   }
 }
 
-
-module.exports.logoutUser = async function(req,res){
-  try{
-    res.cookie("token","");
-    res.send("logout successfully");
-  }catch(err){
-    req.send(err.message);
-  }
-}

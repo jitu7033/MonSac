@@ -1,15 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fixed Responsive Header</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
+    <script>
+        tailwind.config = {
+        theme: {
+            extend: {
+            fontFamily: {
+                helvetica: ["helvetica_now_display", "sans-serif"],
+            },
+            },
+        },
+        };
+    </script>
+    </head>
 
-<body class="font-['helvetica_now_display']">
-    <nav class="w-full fixed top-0 left-0 px-5 py-3">
-        <h3 class="text-xl">Scatch</h3>
+    <body class="font-helvetica bg-gray-50">
+    <!-- Fixed Header -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50 px-6 py-4 flex items-center justify-between">
+        <h3 class="text-2xl font-semibold">Scatch</h3>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-10 text-base items-center">
+        <a href="/shop" class="hover:text-blue-600 transition">Shop</a>
+        <a href="/cart" class="hover:text-blue-600 transition">Cart</a>
+        <a href="#" class="hover:text-blue-600 transition">My Account</a>
+        <a href="/logout" class="text-red-600 font-semibold hover:underline">LogOut</a>
+        </div>
+
+        <!-- Mobile Hamburger -->
+        <button id="menu-toggle" class="md:hidden text-3xl focus:outline-none" aria-label="Toggle menu">
+        <i class="ri-menu-line"></i>
+        </button>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden flex flex-col bg-white shadow-md fixed top-16 left-0 right-0 z-40 px-6 py-4 gap-4 md:hidden">
+        <a href="/shop" class="hover:text-blue-600">Shop</a>
+        <a href="/cart" class="hover:text-blue-600">Cart</a>
+        <a href="#" class="hover:text-blue-600">My Account</a>
+        <a href="/logout" class="text-red-600 font-semibold">LogOut</a>
+    </div>
+
+    <!-- Page Content -->
+    <main class="pt-20 px-6">
+        <div style="height: 4px;"></div>
+    </main>
+
+    <script>
+        const toggleBtn = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        toggleBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        });
+    </script>
+    </body>
+
+    </html>
