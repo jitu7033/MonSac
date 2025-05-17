@@ -5,15 +5,13 @@ const { registerUser , loginUser, logoutUser} = require('../controllers/authCont
 const router = express.Router();
 
 
-router.get("/",function(req,res){
-  res.send("hey");
-});
 
 
 // user routes create 
 
-router.post("/create",registerUser);
+router.post("/register",registerUser);
 router.post("/login", loginUser);
 router.post("/logout",logoutUser)
+
 
 module.exports = router;

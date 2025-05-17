@@ -11,27 +11,36 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,"public")));
-app.set("view engine ", "ejs");
+app.set("view engine", "ejs");
 
 const db = require('./config/mongoose-connection');
 
-// app.use(
-//   expressSession({
-//     resave: false,
-//     saveUninitialized: false,
-//     secret: process.env.EXPRESS_SESSION_SECRET,
-//   })
-// )
-// app.use(flash());
+app.use(
+  expressSession({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.EXPRESS_SESSION_SECRET,
+  })
+)
+app.use(flash());
+
 
 const ownersRouter = require('./routes/ownersRouter')
 const usersRouter = require('./routes/usersRouter')
-const productRouter = require('./routes/productsRouter')
+const productRouter = require('./routes/productsRouter');
+const indexRouter = require('./routes/index')
+const { error } = require('console');
 
 
+// app.get("/users",function(req,res){
+//   res.render("index");
+// });
+
+app.use("/", indexRouter);
 app.use("/owners", ownersRouter);
 app.use("/users",usersRouter);
-app.use("/products", productRouter);  
+app.use("/products", productRouter); 
+
 
 
 app.listen(3000);

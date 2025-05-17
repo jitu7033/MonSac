@@ -28,8 +28,10 @@ router.post("/create", async function(req,res){
 
 
 
-router.get("/",function(req,res){
-  res.send("hey");
+router.get("/admin",function(req,res){
+  let success = req.flash("success");
+  let error = req.flash("error");
+  res.render("createproducts",{success,error});
 })
 
 module.exports = router;
